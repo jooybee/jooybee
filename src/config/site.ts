@@ -3,7 +3,7 @@ export const site = {
   title: "JOOYBEE — Enjoy Being Everything",
   description: "Enjoy Being Everything",
   url: "https://www.jooybee.my.id",
-  locale: "en",
+  locale: "id",
 
   formspree: "https://formspree.io/f/mnpabvbn",
 
@@ -17,7 +17,7 @@ export const site = {
     subtitle: "Enjoy Being Everything.",
     bio: [
       "Halo — saya penulis di balik JOOYBEE. Blog ini tempat saya menaruh esai, catatan produk, opini dan sedikit basa-basi.",
-      "Saya suka ide yang tajam, tools yang kecil, dan metrik yang jujur. Di luar layar: kopi, jalan kaki, dan arsip link yang terlalu banyak.",
+      "Saya suka ide yang tajam, liar, apa adanya dan metrik yang jujur. Di luar layar: kopi, musik, dan fesnuk.",
       "Kalau kamu punya kolaborasi, koreksi, atau sekadar mau sapa — lewat Contact saja.",
     ],
     facts: [
@@ -53,59 +53,59 @@ export const site = {
     titleLine1: "Words that",
     titleHighlight: "punch back.",
     description:
-      "JOOYBEE is a blunt little corner of the internet — essays, notes, and opinions without the filler. Enjoy being everything.",
+      "JOOYBEE adalah sudut kecil di internet yang apa adanya — esai, catatan, opini dan sedikit basa-basi. Enjoy being everything.",
     checklist: [
-      "No fluff, no growth-hacking",
-      "Sharp takes only",
-      "Built for readers who stay",
+      "Opini yang tajam, tapi nggak galak",
+      "Sedikit omong kosong, banyak bualan",
+      "Dibuat untuk saya sendiri, tapi boleh dibaca orang lain juga",
     ],
   },
 
   logos: [
     "ENJOY",
     "BEING",
-    "SQUARE",
+    "EVERYTHING",
     "ENJOY",
     "BEING",
-    "RECTANGLE",
+    "EVERYTHING",
     "ENJOY",
     "BEING",
-    "TRIANGLE",
+    "EVERYTHING",
     "ENJOY",
     "BEING",
-    "STAR",
+    "EVERYTHING",
   ],
 
   features: [
     {
-      title: "Sharp essays",
+      title: "Esai yang tajam",
       description:
-        "Long-form writing that respects your time. No listicles, no SEO bait — just ideas worth finishing.",
+        "Tulisan panjang yang menghargai waktu kamu. Bukan listicle, bukan konten SEO. Cuma ide yang layak dibaca sampai habis.",
     },
     {
-      title: "Blunt opinions",
+      title: "Opini yang blak-blakan",
       description:
-        "We say the quiet part out loud. If something is broken, we name it.",
+        "Kami bilang yang biasanya orang simpan sendiri. Kalau ada yang aneh, ya kami sebut aja.",
     },
     {
-      title: "No paywall theatre",
+      title: "Gratis",
       description:
-        "Everything is free to read. Subscribe only if you want the monthly letter.",
+        "Semua tulisan bisa dibaca gratis. Langganan cuma kalau kamu mau saya cepat kaya.",
     },
     {
-      title: "Privacy-first",
+      title: "Jaminan privasi",
       description:
-        "No tracking pixels, no dark patterns. Your attention stays yours.",
+        "Nggak ada tracking pixel, nggak ada trik-trik aneh, pokoknya family-friendly",
     },
     {
-      title: "Readable by design",
+      title: "Desain nyaman dibaca",
       description:
-        "Typography and layout built for focus. Distraction is the enemy.",
+        "Pemilihan tipografi dan layout desain dibuat senyaman mungkin untuk dibaca bahkan untuk orang yang kurang suka membaca",
     },
     {
-      title: "Archive that lasts",
+      title: "Arsip jangka panjang",
       description:
-        "Posts stay up. Links don't rot. You can always come back.",
+        "Kenangan untuk saya di masa depan, tapi tenang kalian juga boleh baca",
     },
   ],
 
@@ -160,24 +160,24 @@ export const site = {
 
   faq: [
     {
-      q: "What is JOOYBEE?",
-      a: "A small independent blog about ideas, product, culture, and the strange joy of being many things at once. Enjoy Being Everything.",
+      q: "Apa itu JOOYBEE?",
+      a: "Blog kecil independen tentang ide, gagasan, budaya, dan hal-hal random yang layak dinikmati. Enjoy Being Everything.",
     },
     {
-      q: "How often do you publish?",
-      a: "When there's something worth saying. Usually a few times a month. Quality over cadence.",
+      q: "Seberapa sering publish?",
+      a: "Kalau ada yang layak dibicarain. Biasanya beberapa kali sebulan. Kualitas lebih penting dari pada kuantitas.",
     },
     {
-      q: "Can I republish a post?",
-      a: "Ask first. Most of the time we say yes with attribution and a link back.",
+      q: "Bolehkah re-publish tulisannya?",
+      a: "Boleh kalau izin terlebih dahulu",
     },
     {
-      q: "Do you take guest posts?",
-      a: "Rarely. If you have a sharp, finished draft that fits the tone, use the contact form.",
+      q: "Menerima guest post?",
+      a: "Jarang. Kalau kamu punya draf yang matang dan menarik bagi saya, kirim lewat form contact saja.",
     },
     {
-      q: "Is there a newsletter?",
-      a: "Yes. One email a month — a sharp essay and zero growth-hacking. Sign up from any page footer or the contact form.",
+      q: "Ada newsletter?",
+      a: "Ada. tapi belum jadi masih dalam proses ",
     },
   ],
 
