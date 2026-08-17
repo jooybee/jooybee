@@ -56,7 +56,7 @@ export const site = {
       "JOOYBEE adalah sudut kecil di internet yang apa adanya — esai, catatan, opini dan sedikit basa-basi. Enjoy being everything.",
     checklist: [
       "Opini yang tajam, tapi nggak galak",
-      "Sedikit omong kosong, banyak bualan",
+      "Sedikit omong kosong, tapi tetap memiliki makna",
       "Dibuat untuk saya sendiri, tapi boleh dibaca orang lain juga",
     ],
   },
@@ -105,7 +105,7 @@ export const site = {
     {
       title: "Arsip jangka panjang",
       description:
-        "Kenangan untuk saya di masa depan, tapi tenang kalian juga boleh baca",
+        "Kenangan untuk saya di masa depan, tapi kalian juga boleh baca",
     },
   ],
 
