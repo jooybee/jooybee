@@ -41,7 +41,7 @@ export const site = {
     { label: "Beranda", href: "/" },
     { label: "Blog", href: "/blog" },
     { label: "Kategori", href:"/blog/category"},
-    { label: "About me", href: "/about" },
+    { label: "Tentang saya", href: "/about" },
   ],
 
   cta: {
