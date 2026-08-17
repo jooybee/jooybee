@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Badge from "../../../components/Badge.astro";
+import { site } from "../../../config/site";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const categories = [...new Set(posts.map((p) => p.data.category))].sort();
+
+const counts: Record<string, number> = {};
+for (const cat of categories) {
+  counts[cat] = posts.filter((p) => p.data.category === cat).length;
+}
+
+const colors = [
+  "bg-[var(--color-yellow-mark)]",
+  "bg-[var(--color-lime)]",
+  "bg-[var(--color-bubble)]",
+  "bg-[var(--color-tangerine)]",
+  "bg-[var(--color-grape)]",
+  "bg-[var(--color-acid)]",
+  "bg-[var(--color-cobalt)]",
+];
+---
+
+<BaseLayout title={`Kategori — ${site.name}`} description={site.description}>
+  <section class="bg-grid section">
+    <div class="container-brutal">
+      <Badge color="lime" class="mb-4">Kategori</Badge>
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight mb-3">
+        Topik, <span class="mark">tanpa isian.</span>
+      </h1>
+      <p class="text-lg text-[var(--color-ink)]/70 max-w-xl mb-10">
+        Pilih kategori. Langsung ke tulisan yang relevan.
+      </p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {
+          categories.map((cat, i) => (
+            <a
+              href={`/blog/category/${cat.toLowerCase()}/`}
+              class="brutal bg-white no-underline text-[var(--color-ink)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all"
+            >
+              <div
+                class:list={[
+                  "h-3 w-full border-b-[3px] border-[var(--color-ink)]",
+                  colors[i % colors.length],
+                ]}
+              />
+              <div class="p-5">
+                <div
+                  class:list={[
+                    "w-10 h-10 mb-4 border-[3px] border-[var(--color-ink)] shadow-[3px_3px_0_0_var(--color-ink)]",
+                    colors[i % colors.length],
+                  ]}
+                />
+                <h2 class="text-xl font-bold tracking-tight mb-1">{cat}</h2>
+                <p class="font-mono text-xs text-[var(--color-ink)]/50 mb-4">
+                  {counts[cat]} tulisan
+                </p>
+                <span class="font-mono text-xs font-bold uppercase tracking-wide text-[var(--color-ink)]/40">
+                  Lihat →
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

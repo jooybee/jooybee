@@ -1,0 +1,78 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogCard from "../../../components/BlogCard.astro";
+import Badge from "../../../components/Badge.astro";
+import { site } from "../../../config/site";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+  const categories = [...new Set(allPosts.map((p) => p.data.category))];
+
+  return categories.map((category) => ({
+    params: { category: category.toLowerCase() },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+const allPosts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const posts = allPosts.filter(
+  (p) => p.data.category.toLowerCase() === category
+);
+
+const displayName = posts[0]?.data.category ?? category;
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+<BaseLayout
+  title={`${displayName} — ${site.name}`}
+  description={`Tulisan kategori ${displayName}.`}
+>
+  <section class="bg-grid section">
+    <div class="container-brutal">
+      <a
+        href="/blog/category/"
+        class="inline-flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-wide text-[var(--color-ink)]/60 no-underline mb-6 hover:text-[var(--color-ink)]"
+      >
+        ← Semua kategori
+      </a>
+
+      <Badge color="lime" class="mb-4">{displayName}</Badge>
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight mb-3">
+        {displayName}
+      </h1>
+      <p class="text-lg text-[var(--color-ink)]/70 max-w-xl mb-10">
+        {posts.length} tulisan dalam kategori ini.
+      </p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {
+          posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              href={`/blog/${post.id}/`}
+              category={post.data.category}
+              date={formatDate(post.data.pubDate)}
+              author={post.data.author}
+              image={post.data.image}
+              searchText={(post.data.tags || []).join(" ")}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
