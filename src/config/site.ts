@@ -2,7 +2,7 @@ export const site = {
   name: "JOOYBEE",
   title: "JOOYBEE — Enjoy Being Everything",
   description: "Enjoy Being Everything",
-  url: "https://example.com",
+  url: "https://www.jooybee.my.id",
   locale: "en",
 
   formspree: "https://formspree.io/f/mnpabvbn",
