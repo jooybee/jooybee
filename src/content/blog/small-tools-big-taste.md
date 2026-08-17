@@ -3,7 +3,7 @@ title: "Small tools, big taste"
 description: "Why the best product sense often comes from boring constraints and tiny surfaces."
 pubDate: 2026-02-10
 author: "Lena Hart"
-category: "Opinion"
+category: "Essay"
 tags: ["product", "design", "tools"]
 image: "/images/posts/tools.svg"
 ---

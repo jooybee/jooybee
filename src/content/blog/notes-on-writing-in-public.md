@@ -3,7 +3,7 @@ title: "Notes on writing in public without performing"
 description: "How to publish regularly without turning every post into a personal brand asset."
 pubDate: 2026-03-01
 author: "Dana Okafor"
-category: "Essay"
+category: "Playbook"
 tags: ["writing", "culture"]
 ---
 

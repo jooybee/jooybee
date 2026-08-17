@@ -11,21 +11,29 @@ export async function getStaticPaths() {
 
   return categories.map((category) => ({
     params: { category: category.toLowerCase() },
-    props: { category },
+    props: {
+      categorySlug: category.toLowerCase(),
+      categoryName: category,
+    },
   }));
 }
 
-const { category } = Astro.props;
+const { categorySlug, categoryName } = Astro.props;
 
 const allPosts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const posts = allPosts.filter(
-  (p) => p.data.category.toLowerCase() === category
+const filtered = allPosts.filter(
+  (p) => p.data.category.toLowerCase() === categorySlug
 );
 
-const displayName = posts[0]?.data.category ?? category;
+const perPage = site.postsPerPage;
+const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+const currentPage = 1;
+const posts = filtered.slice(0, perPage);
+
+const displayName = categoryName;
 
 function formatDate(d: Date) {
   return d.toLocaleDateString("en-US", {
@@ -54,7 +62,8 @@ function formatDate(d: Date) {
         {displayName}
       </h1>
       <p class="text-lg text-[var(--color-ink)]/70 max-w-xl mb-10">
-        {posts.length} tulisan dalam kategori ini.
+        {filtered.length} tulisan dalam kategori ini
+        {totalPages > 1 && ` · Halaman ${currentPage} dari ${totalPages}`}
       </p>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -73,6 +82,25 @@ function formatDate(d: Date) {
           ))
         }
       </div>
+
+      {
+        totalPages > 1 && (
+          <nav class="mt-12 flex items-center justify-center gap-3" aria-label="Pagination">
+            <span class="btn-brutal btn-secondary px-4 py-2 text-sm opacity-40 pointer-events-none">
+              ← Prev
+            </span>
+            <span class="font-mono text-sm font-bold">
+              {currentPage} / {totalPages}
+            </span>
+            <a
+              href={`/blog/category/${categorySlug}/page/2/`}
+              class="btn-brutal btn-secondary px-4 py-2 text-sm no-underline text-[var(--color-ink)]"
+            >
+              Next →
+            </a>
+          </nav>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

@@ -3,7 +3,7 @@ title: "Cookieless analytics, explained without the legal jargon"
 description: "How modern analytics can measure real usage without cookies, consent banners, or a meeting with your DPO."
 pubDate: 2026-05-14
 author: "Lena Hart"
-category: "Privacy"
+category: "Essay"
 tags: ["privacy", "analytics", "gdpr"]
 image: "/images/posts/cookieless.svg"
 ---

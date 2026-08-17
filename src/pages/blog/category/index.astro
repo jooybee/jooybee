@@ -44,26 +44,23 @@ const colors = [
               href={`/blog/category/${cat.toLowerCase()}/`}
               class="brutal bg-white no-underline text-[var(--color-ink)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all"
             >
-              <div
-                class:list={[
-                  "h-3 w-full border-b-[3px] border-[var(--color-ink)]",
-                  colors[i % colors.length],
-                ]}
-              />
               <div class="p-5">
-                <div
-                  class:list={[
-                    "w-10 h-10 mb-4 border-[3px] border-[var(--color-ink)] shadow-[3px_3px_0_0_var(--color-ink)]",
-                    colors[i % colors.length],
-                  ]}
-                />
-                <h2 class="text-xl font-bold tracking-tight mb-1">{cat}</h2>
-                <p class="font-mono text-xs text-[var(--color-ink)]/50 mb-4">
+                {/* Baris judul + kotak sejajar dengan kata kategori */}
+                <div class="flex items-center gap-2.5 mb-1">
+                  <div
+                    class:list={[
+                      "w-4 h-4 shrink-0 border-[2px] border-[var(--color-ink)] shadow-[1.5px_1.5px_0_0_var(--color-ink)]",
+                      colors[i % colors.length],
+                    ]}
+                  />
+                  <h2 class="text-xl font-bold tracking-tight leading-none m-0">
+                    {cat}
+                  </h2>
+                </div>
+
+                <p class="font-mono text-xs text-[var(--color-ink)]/50 pl-[26px]">
                   {counts[cat]} tulisan
                 </p>
-                <span class="font-mono text-xs font-bold uppercase tracking-wide text-[var(--color-ink)]/40">
-                  Lihat →
-                </span>
               </div>
             </a>
           ))

@@ -3,7 +3,7 @@ title: "Ship faster with blunt metrics"
 description: "A practical loop for using a small set of honest numbers to make weekly product decisions."
 pubDate: 2026-04-30
 author: "Marco Ríos"
-category: "Playbook"
+category: "Privacy"
 tags: ["product", "metrics", "shipping"]
 ---
 

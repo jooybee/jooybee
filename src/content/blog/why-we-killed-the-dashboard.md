@@ -3,7 +3,7 @@ title: "Why we killed the dashboard (and you should too)"
 description: "Most analytics dashboards are anxiety machines. Here's the case for replacing 14 charts with three blunt numbers."
 pubDate: 2026-05-28
 author: "Dana Okafor"
-category: "Opinion"
+category: "Essay"
 tags: ["analytics", "product", "opinion"]
 ---
 

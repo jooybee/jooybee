@@ -1,0 +1,134 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../../../layouts/BaseLayout.astro";
+import BlogCard from "../../../../../components/BlogCard.astro";
+import Badge from "../../../../../components/Badge.astro";
+import { site } from "../../../../../config/site";
+
+export async function getStaticPaths() {
+  const allPosts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  const categories = [...new Set(allPosts.map((p) => p.data.category))];
+  const perPage = site.postsPerPage;
+  const paths = [];
+
+  for (const category of categories) {
+    const filtered = allPosts.filter(
+      (p) => p.data.category.toLowerCase() === category.toLowerCase()
+    );
+    const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+
+    // hanya generate page 2 ke atas
+    for (let page = 2; page <= totalPages; page++) {
+      const start = (page - 1) * perPage;
+      paths.push({
+        params: {
+          category: category.toLowerCase(),
+          page: String(page),
+        },
+        props: {
+          categorySlug: category.toLowerCase(),
+          categoryName: category,
+          page,
+          totalPages,
+          posts: filtered.slice(start, start + perPage),
+          totalPosts: filtered.length,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { categorySlug, categoryName, page, totalPages, posts, totalPosts } =
+  Astro.props;
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+<BaseLayout
+  title={`${categoryName} — halaman ${page} — ${site.name}`}
+  description={`Tulisan kategori ${categoryName} (halaman ${page}).`}
+>
+  <section class="bg-grid section">
+    <div class="container-brutal">
+      <a
+        href="/blog/category/"
+        class="inline-flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-wide text-[var(--color-ink)]/60 no-underline mb-6 hover:text-[var(--color-ink)]"
+      >
+        ← Semua kategori
+      </a>
+
+      <Badge color="lime" class="mb-4">{categoryName}</Badge>
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight mb-3">
+        {categoryName}
+      </h1>
+      <p class="text-lg text-[var(--color-ink)]/70 max-w-xl mb-10">
+        {totalPosts} tulisan dalam kategori ini · Halaman {page} dari {totalPages}
+      </p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {
+          posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              href={`/blog/${post.id}/`}
+              category={post.data.category}
+              date={formatDate(post.data.pubDate)}
+              author={post.data.author}
+              image={post.data.image}
+              searchText={(post.data.tags || []).join(" ")}
+            />
+          ))
+        }
+      </div>
+
+      <nav class="mt-12 flex items-center justify-center gap-3" aria-label="Pagination">
+        {
+          page > 2 ? (
+            <a
+              href={`/blog/category/\( {categorySlug}/page/ \){page - 1}/`}
+              class="btn-brutal btn-secondary px-4 py-2 text-sm no-underline text-[var(--color-ink)]"
+            >
+              ← Prev
+            </a>
+          ) : (
+            <a
+              href={`/blog/category/${categorySlug}/`}
+              class="btn-brutal btn-secondary px-4 py-2 text-sm no-underline text-[var(--color-ink)]"
+            >
+              ← Prev
+            </a>
+          )
+        }
+        <span class="font-mono text-sm font-bold">
+          {page} / {totalPages}
+        </span>
+        {
+          page < totalPages ? (
+            <a
+              href={`/blog/category/\( {categorySlug}/page/ \){page + 1}/`}
+              class="btn-brutal btn-secondary px-4 py-2 text-sm no-underline text-[var(--color-ink)]"
+            >
+              Next →
+            </a>
+          ) : (
+            <span class="btn-brutal btn-secondary px-4 py-2 text-sm opacity-40 pointer-events-none">
+              Next →
+            </span>
+          )
+        }
+      </nav>
+    </div>
+  </section>
+</BaseLayout>

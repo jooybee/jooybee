@@ -3,7 +3,7 @@ title: "A reading list for builders who hate dashboards"
 description: "Books and essays that teach judgment, not just frameworks — for people who ship."
 pubDate: 2026-03-22
 author: "Tomás Vey"
-category: "Playbook"
+category: "Essay"
 tags: ["reading", "product", "books"]
 ---
 
