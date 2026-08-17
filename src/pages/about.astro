@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Badge from "../components/Badge.astro";
+import Button from "../components/Button.astro";
+import SocialIcon from "../components/SocialIcon.astro";
+import { site } from "../config/site";
+
+const socials = site.socials.filter((s) => s.href && s.href.length > 0);
+const authorName = site.author ?? site.name;
+---
+
+<BaseLayout
+  title={`About — ${site.name}`}
+  description={`About ${authorName}. ${site.description}`}
+>
+  <section class="bg-grid section">
+    <div class="container-brutal">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <!-- Left: identity card -->
+        <aside class="lg:col-span-4">
+          <div class="brutal bg-white p-6 sticky top-24">
+            <!-- Avatar placeholder neo-brutal -->
+            <div
+              class="w-full aspect-square mb-5 border-[3px] border-[var(--color-ink)] bg-[var(--color-yellow-mark)] shadow-[4px_4px_0_0_var(--color-ink)] flex items-center justify-center relative overflow-hidden"
+            >
+              <div
+                class="absolute top-3 left-3 w-16 h-16 border-[3px] border-[var(--color-ink)] bg-[var(--color-cobalt)]"
+                aria-hidden="true"
+              >
+              </div>
+              <div
+                class="absolute bottom-4 right-4 w-24 h-24 border-[3px] border-[var(--color-ink)] bg-[var(--color-bubble)]"
+                aria-hidden="true"
+              >
+              </div>
+              <span class="relative z-10 font-black text-5xl tracking-tight text-[var(--color-ink)]">
+                {authorName.slice(0, 1).toUpperCase()}
+              </span>
+            </div>
+
+            <h1 class="text-2xl font-black tracking-tight mb-1">{authorName}</h1>
+            <p class="font-mono text-xs uppercase tracking-wider text-[var(--color-ink)]/50 mb-5">
+              {site.name} · {site.about.subtitle}
+            </p>
+
+            <ul class="space-y-2 mb-6">
+              {
+                site.about.facts.map((f) => (
+                  <li class="flex justify-between gap-3 text-sm border-b-2 border-[var(--color-ink)]/10 pb-2">
+                    <span class="font-mono text-xs uppercase text-[var(--color-ink)]/45">
+                      {f.label}
+                    </span>
+                    <span class="font-bold text-right">{f.value}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <Button href="/contact" variant="primary" class="w-full justify-center mb-3">
+              Contact me →
+            </Button>
+            <Button href="/blog" variant="secondary" class="w-full justify-center">
+              Read the blog
+            </Button>
+          </div>
+        </aside>
+
+        <!-- Right: story + socials -->
+        <div class="lg:col-span-8">
+          <Badge color="lime" class="mb-4">{site.about.badge}</Badge>
+
+          <h2 class="text-5xl md:text-6xl font-black tracking-tight leading-[0.95] mb-6">
+            {site.about.titleLine1}
+            <br />
+            <span class="mark">{site.about.titleHighlight}</span>
+          </h2>
+
+          <div class="space-y-4 text-lg leading-relaxed text-[var(--color-ink)]/85 max-w-2xl mb-10">
+            {site.about.bio.map((p) => <p>{p}</p>)}
+          </div>
+
+          <!-- Socials -->
+          <div class="mb-4 flex items-center gap-2">
+            <span
+              class="inline-block w-3 h-3 bg-[var(--color-bubble)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]"
+              aria-hidden="true"
+            ></span>
+            <p class="font-mono text-xs uppercase tracking-widest text-[var(--color-ink)]/50 m-0">
+              Find me online
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-3 max-w-xl">
+            {
+              socials.map((s) => (
+                <a
+                  href={s.href}
+                  target={s.id === "email" ? undefined : "_blank"}
+                  rel={s.id === "email" ? undefined : "noopener noreferrer"}
+                  class="brutal bg-white px-4 py-3 flex items-center gap-3 no-underline text-[var(--color-ink)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all"
+                >
+                  <span class="inline-flex items-center justify-center w-10 h-10 border-[2.5px] border-[var(--color-ink)] bg-[var(--color-yellow-mark)] shadow-[2px_2px_0_0_var(--color-ink)] shrink-0">
+                    <SocialIcon id={s.id} class="w-5 h-5" />
+                  </span>
+                  <span class="flex flex-col min-w-0">
+                    <span class="font-bold text-sm leading-tight">{s.label}</span>
+                    <span class="font-mono text-[10px] text-[var(--color-ink)]/45 truncate">
+                      {s.href.replace(/^https?:\/\//, "").replace(/^mailto:/, "")}
+                    </span>
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+
+          {
+            socials.length === 0 && (
+              <p class="font-mono text-sm text-[var(--color-ink)]/50">
+                Belum ada link sosial — isi di <code class="font-mono">src/config/site.ts</code> →
+                socials.
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

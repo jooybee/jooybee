@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "./BlogCard.astro";
+import Button from "./Button.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+<section class="section">
+  <div class="container-brutal">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+         <span
+          class="inline-block w-3 h-3 bg-[var(--color-bubble)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]" aria-hidden="true"
+         ></span>
+          <p class="font-mono text-xs uppercase tracking-widest text-[var(--color-ink)]/50 m-0">
+             From the blog
+          </p>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">
+          Sharp words, no filler.
+        </h2>
+      </div>
+      <Button href="/blog/" variant="secondary" size="sm">
+        All posts →
+      </Button>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      {
+        posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            href={`/blog/${post.id}/`}
+            category={post.data.category}
+            date={formatDate(post.data.pubDate)}
+            author={post.data.author}
+            image={post.data.image}
+            searchText={(post.data.tags || []).join(" ")}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

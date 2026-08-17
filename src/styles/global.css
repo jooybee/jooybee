@@ -1,0 +1,185 @@
+@import "tailwindcss";
+@import "@fontsource/archivo/400.css";
+@import "@fontsource/archivo/500.css";
+@import "@fontsource/archivo/600.css";
+@import "@fontsource/archivo/700.css";
+@import "@fontsource/archivo/800.css";
+@import "@fontsource/archivo/900.css";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+
+@theme {
+  /* ===== Colors (Slab palette) ===== */
+  --color-ink: #0a0a0a;
+  --color-paper: #faf8f0;
+  --color-paper-2: #f5f2e8;
+  --color-cobalt: #3b5bdb;
+  --color-acid: #d4ff00;
+  --color-lime: #b8ff3c;
+  --color-bubble: #ff6b9d;
+  --color-grape: #9b5de5;
+  --color-tangerine: #ff9f1c;
+  --color-yellow-mark: #ffe566;
+  --color-white: #ffffff;
+
+  /* ===== Borders & Shadows ===== */
+  --border-width: 3px;
+  --shadow-hard: 4px 4px 0 0 var(--color-ink);
+  --shadow-hard-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-hard-lg: 6px 6px 0 0 var(--color-ink);
+
+  /* ===== Fonts ===== */
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid background ala Slab */
+.bg-grid {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===== Hard Border + Shadow ===== */
+.brutal {
+  border: 3px solid var(--color-ink);
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+.brutal-sm {
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 0 var(--color-ink);
+}
+
+.brutal-lg {
+  border: 3px solid var(--color-ink);
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+/* ===== Pressable Button ===== */
+.btn-brutal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 3px solid var(--color-ink);
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.btn-brutal:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--color-ink);
+}
+
+.btn-brutal:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 var(--color-ink);
+}
+
+.btn-primary {
+  background: var(--color-cobalt);
+  color: white;
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--color-ink);
+}
+
+.btn-acid {
+  background: var(--color-acid);
+  color: var(--color-ink);
+}
+
+/* ===== Highlight Text ===== */
+.mark {
+  background: var(--color-yellow-mark);
+  padding: 0.05em 0.2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border: 2.5px solid var(--color-ink);
+  box-shadow: 3px 3px 0 0 var(--color-ink);
+  display: inline-block;
+  line-height: 1.05;
+}
+
+/* ===== Badge / Pill ===== */
+.badge-brutal {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--color-ink);
+  box-shadow: 2px 2px 0 0 var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* ===== Marquee ===== */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* ===== Section helpers ===== */
+.section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.container-brutal {
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Focus visible for a11y */
+:focus-visible {
+  outline: 3px solid var(--color-cobalt);
+  outline-offset: 2px;
+}

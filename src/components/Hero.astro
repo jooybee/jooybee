@@ -1,0 +1,132 @@
+---
+import { site } from "../config/site";
+import Badge from "./Badge.astro";
+import Button from "./Button.astro";
+---
+
+<section class="bg-grid section relative overflow-hidden border-0">
+  <div class="container-brutal">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Left: copy -->
+      <div>
+        <Badge color="lime" class="mb-6">
+          {site.hero.badge}
+        </Badge>
+
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-6">
+          {site.hero.titleLine1}
+          <br />
+          <span class="mark">{site.hero.titleHighlight}</span>
+        </h1>
+
+        <p class="text-lg text-[var(--color-ink)]/80 max-w-md mb-8 leading-relaxed">
+          {site.hero.description}
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-8">
+          <Button href={site.cta.primary.href} size="lg">
+            {site.cta.primary.label}
+            <span aria-hidden="true">→</span>
+          </Button>
+          <Button href={site.cta.secondary.href} variant="secondary" size="lg">
+            {site.cta.secondary.label}
+          </Button>
+        </div>
+
+        <ul class="flex flex-col gap-2 text-sm font-medium">
+          {
+            site.hero.checklist.map((item) => (
+              <li class="flex items-center gap-2">
+                <span
+                  class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[var(--color-lime)] border-2 border-[var(--color-ink)] text-[10px] font-bold"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Right: Bold Neo-brutalism (lebih ke tengah) -->
+      <div
+        class="relative h-72 sm:h-80 w-full max-w-md mx-auto lg:ml-auto"
+        aria-hidden="true"
+        style="isolation:isolate;"
+      >
+        <!-- Yellow besar - lebih ke tengah -->
+        <div
+          style="position:absolute;width:8.6rem;height:8.6rem;top:10%;left:10%;background:#ffe566;border:3px solid #0a0a0a;box-shadow:7px 7px 0 0 #0a0a0a;transform:rotate(-26deg);z-index:1;animation:jb-bob 3.5s ease-in-out infinite;"
+        ></div>
+
+        <!-- Pink - nabrak kuat di tengah -->
+        <div
+          style="position:absolute;width:5.8rem;height:5.8rem;top:30%;left:36%;background:#ff6b9d;border:3px solid #0a0a0a;box-shadow:6px 6px 0 0 #0a0a0a;transform:rotate(22deg);z-index:4;animation:jb-punch 2.7s ease-in-out infinite;"
+        ></div>
+
+        <!-- Cobalt bar - menyilang di tengah -->
+        <div
+          style="position:absolute;width:12.5rem;height:1.7rem;top:52%;left:14%;background:#3b5bdb;border:3px solid #0a0a0a;box-shadow:6px 6px 0 0 #0a0a0a;transform:rotate(41deg);z-index:2;animation:jb-slide 3.6s ease-in-out infinite;"
+        ></div>
+
+        <!-- Triangle - kanan atas, agak masuk -->
+        <svg
+          style="position:absolute;width:5.8rem;height:5.2rem;top:2%;right:8%;filter:drop-shadow(5px 5px 0 #0a0a0a);transform:rotate(-34deg);z-index:3;animation:jb-tilt 3s ease-in-out infinite;"
+          viewBox="0 0 100 90"
+        >
+          <polygon
+            points="50,4 96,86 4,86"
+            fill="#ff8c42"
+            stroke="#0a0a0a"
+            stroke-width="5"
+            stroke-linejoin="miter"
+          />
+        </svg>
+
+        <!-- Star - kiri bawah -->
+        <svg
+          style="position:absolute;width:2.8rem;height:2.8rem;bottom:8%;left:12%;filter:drop-shadow(3px 3px 0 #0a0a0a);z-index:5;animation:jb-spin 6.5s linear infinite;"
+          viewBox="0 0 100 100"
+        >
+          <polygon
+            points="50,2 62,38 98,38 69,60 80,96 50,74 20,96 31,60 2,38 38,38"
+            fill="#ff8c42"
+            stroke="#0a0a0a"
+            stroke-width="4"
+            stroke-linejoin="miter"
+          />
+        </svg>
+
+        <!-- Kotak kecil - aksen -->
+        <div
+          style="position:absolute;width:2.2rem;height:2.2rem;bottom:14%;right:16%;background:#ffe566;border:3px solid #0a0a0a;box-shadow:3px 3px 0 0 #0a0a0a;transform:rotate(18deg);z-index:3;animation:jb-bob 2.5s ease-in-out infinite;"
+        ></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  @keyframes jb-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  @keyframes jb-punch {
+    0%, 100% { transform: translate(0, 0) rotate(22deg); }
+    50% { transform: translate(-8px, 6px) rotate(16deg); }
+  }
+  @keyframes jb-slide {
+    0%, 100% { transform: translateX(0) rotate(41deg); }
+    50% { transform: translateX(10px) rotate(41deg); }
+  }
+  @keyframes jb-tilt {
+    0%, 100% { transform: rotate(-34deg); }
+    50% { transform: rotate(-26deg) translateY(5px); }
+  }
+  @keyframes jb-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>

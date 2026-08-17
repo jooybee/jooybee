@@ -1,0 +1,74 @@
+---
+import NoImage from "./NoImage.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  category?: string;
+  date?: string;
+  author?: string;
+  image?: string | undefined;
+  searchText?: string;
+}
+
+const {
+  title,
+  description,
+  href,
+  category,
+  date,
+  author,
+  image,
+  searchText = "",
+} = Astro.props;
+
+const searchable = [title, description, category, author, searchText]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<article
+  data-blog-card
+  data-search={searchable}
+  class="brutal bg-white overflow-hidden flex flex-col h-full hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all"
+>
+  <a href={href} class="flex flex-col h-full no-underline text-[var(--color-ink)]">
+    <div class="aspect-[16/9] w-full border-b-[3px] border-[var(--color-ink)] overflow-hidden bg-[var(--color-paper-2)]">
+      {
+        image ? (
+          <img
+            src={image}
+            alt=""
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <NoImage class="w-full h-full min-h-[140px]" />
+        )
+      }
+    </div>
+
+    <div class="p-5 flex flex-col flex-1">
+      {
+        category && (
+          <span class="badge-brutal bg-[var(--color-paper-2)] text-[10px] mb-3 w-fit">
+            {category}
+          </span>
+        )
+      }
+      <h3 class="text-xl font-bold tracking-tight mb-2 leading-snug">
+        {title}
+      </h3>
+      <p class="text-sm leading-relaxed text-[var(--color-ink)]/70 flex-1 mb-4">
+        {description}
+      </p>
+      <div class="font-mono text-xs text-[var(--color-ink)]/50 flex flex-wrap gap-x-2 gap-y-1">
+        {author && 
+         (<a href="/about" class="no-underline hover:underline">{author}</a>)}
+        {author && date && <span aria-hidden="true">·</span>}
+        {date && <time>{date}</time>}
+      </div>
+    </div>
+  </a>
+</article>

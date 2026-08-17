@@ -1,0 +1,57 @@
+---
+interface Props {
+  placeholder?: string;
+  class?: string;
+}
+
+const { placeholder = "Search posts…", class: className = "" } = Astro.props;
+---
+
+<div class={`relative ${className}`}>
+  <label for="blog-search" class="sr-only">Search posts</label>
+  <input
+    id="blog-search"
+    type="search"
+    name="q"
+    placeholder={placeholder}
+    autocomplete="off"
+    class="w-full brutal-sm bg-white px-4 py-3 pr-12 font-sans text-base text-[var(--color-ink)] placeholder:text-[var(--color-ink)]/40 outline-none focus:shadow-[2px_2px_0_0_var(--color-ink)] focus:translate-x-[1px] focus:translate-y-[1px] transition-all"
+  />
+  <span
+    class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-sm text-[var(--color-ink)]/40"
+    aria-hidden="true"
+  >
+    ⌕
+  </span>
+</div>
+
+<script>
+  function initSearch() {
+    const input = document.getElementById("blog-search") as HTMLInputElement | null;
+    if (!input) return;
+
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-blog-card]")
+    );
+
+    const filter = () => {
+      const q = input.value.trim().toLowerCase();
+      cards.forEach((card) => {
+        const hay = (card.dataset.search || "").toLowerCase();
+        const match = !q || hay.includes(q);
+        card.style.display = match ? "" : "none";
+      });
+
+      const empty = document.getElementById("search-empty");
+      if (empty) {
+        const visible = cards.some((c) => c.style.display !== "none");
+        empty.classList.toggle("hidden", visible || !q);
+      }
+    };
+
+    input.addEventListener("input", filter);
+  }
+
+  initSearch();
+  document.addEventListener("astro:page-load", initSearch);
+</script>

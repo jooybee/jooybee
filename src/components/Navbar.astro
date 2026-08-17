@@ -1,0 +1,76 @@
+---
+import { site } from "../config/site";
+import Button from "./Button.astro";
+---
+
+<header class="sticky top-0 z-50 bg-white border-b-[3px] border-[var(--color-ink)]">
+  <div class="container-brutal flex items-center justify-between h-16 md:h-18">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 font-black text-xl tracking-tight no-underline text-[var(--color-ink)]">
+      <span class="inline-block w-7 h-7 bg-[var(--color-yellow-mark)] border-[2.5px] border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]"
+            aria-hidden="true"
+      ></span>
+      {site.name}
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Main">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-semibold uppercase tracking-wide text-[var(--color-ink)] no-underline hover:opacity-70 transition-opacity"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- CTA -->
+    <div class="hidden md:block">
+      <Button href={site.cta.primary.href} size="sm">
+        {site.cta.primary.label}
+      </Button>
+    </div>
+
+    <!-- Mobile menu button (simple) -->
+    <button
+      id="menu-toggle"
+      class="md:hidden btn-brutal btn-secondary px-3 py-2 text-sm"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      type="button"
+    >
+      Menu
+    </button>
+  </div>
+
+  <!-- Mobile panel -->
+  <div id="mobile-menu" class="hidden md:hidden border-t-[3px] border-[var(--color-ink)] bg-white">
+    <nav class="container-brutal flex flex-col gap-4 py-4" aria-label="Mobile">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="text-base font-semibold uppercase tracking-wide text-[var(--color-ink)] no-underline py-1"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <Button href={site.cta.primary.href} class="w-full justify-center">
+        {site.cta.primary.label}
+      </Button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+</script>

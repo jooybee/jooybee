@@ -1,0 +1,75 @@
+---
+import Button from "./Button.astro";
+import Badge from "./Badge.astro";
+
+interface Props {
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  features: readonly string[];
+  cta: string;
+  href: string;
+  featured?: boolean;
+  badge?: string;
+}
+
+const {
+  name,
+  price,
+  period,
+  description,
+  features,
+  cta,
+  href,
+  featured = false,
+  badge,
+} = Astro.props;
+---
+
+<article
+  class:list={[
+    "brutal bg-white p-7 flex flex-col relative h-full",
+    featured && "ring-0 scale-[1.02] z-10",
+  ]}
+>
+  {
+    badge && (
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+        <Badge color="acid">{badge}</Badge>
+      </div>
+    )
+  }
+
+  <h3 class="text-2xl font-black tracking-tight mb-1">{name}</h3>
+  <p class="text-sm text-[var(--color-ink)]/60 mb-5">{description}</p>
+
+  <div class="mb-6">
+    <span class="text-4xl font-black">{price}</span>
+    <span class="text-base font-medium text-[var(--color-ink)]/50">{period}</span>
+  </div>
+
+  <ul class="space-y-2.5 mb-8 flex-1">
+    {
+      features.map((item) => (
+        <li class="flex items-start gap-2 text-sm">
+          <span
+            class="mt-0.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--color-lime)] border border-[var(--color-ink)] text-[9px] font-bold shrink-0"
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+
+  <Button
+    href={href}
+    variant={featured ? "primary" : "secondary"}
+    class="w-full justify-center"
+  >
+    {cta}
+  </Button>
+</article>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#f5f2e8"/>
+  <rect x="100" y="80" width="120" height="120" fill="#ff6b9d" stroke="#0a0a0a" stroke-width="4"/>
+  <rect x="260" y="80" width="120" height="120" fill="#9b5de5" stroke="#0a0a0a" stroke-width="4"/>
+  <rect x="420" y="80" width="120" height="120" fill="#ff9f1c" stroke="#0a0a0a" stroke-width="4"/>
+  <rect x="580" y="80" width="120" height="120" fill="#b8ff3c" stroke="#0a0a0a" stroke-width="4"/>
+  <rect x="100" y="240" width="600" height="100" fill="#0a0a0a"/>
+  <text x="400" y="300" font-family="monospace" font-size="28" font-weight="700" fill="#d4ff00" text-anchor="middle">SMALL TOOLS</text>
+</svg>

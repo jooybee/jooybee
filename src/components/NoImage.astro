@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  label?: string;
+}
+
+const { class: className = "", label = "NO IMAGE" } = Astro.props;
+---
+
+<div
+  class={`flex flex-col items-center justify-center gap-2 bg-[var(--color-paper-2)] border-[3px] border-[var(--color-ink)] ${className}`}
+  role="img"
+  aria-label={label}
+>
+  <!-- Neo-brutalist geometric placeholder -->
+  <div class="relative w-16 h-16">
+    <div
+      class="absolute inset-0 border-[3px] border-[var(--color-ink)] bg-[var(--color-yellow-mark)] shadow-[3px_3px_0_0_var(--color-ink)]"
+    >
+    </div>
+    <div
+      class="absolute top-2 left-2 w-full h-full border-[3px] border-[var(--color-ink)] bg-[var(--color-cobalt)]"
+    >
+    </div>
+  </div>
+  <span class="font-mono text-xs font-bold uppercase tracking-widest text-[var(--color-ink)]/60">
+    {label}
+  </span>
+</div>

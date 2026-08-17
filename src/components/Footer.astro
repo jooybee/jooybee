@@ -1,0 +1,45 @@
+---
+import { site } from "../config/site";
+---
+
+<footer class="bg-white border-t-[3px] border-[var(--color-ink)] py-12">
+  <div class="container-brutal">
+    <div class="flex flex-col md:flex-row justify-between gap-8 mb-10">
+      <div>
+        <a
+          href="/"
+          class="flex items-center gap-2 font-black text-xl tracking-tight no-underline text-[var(--color-ink)] mb-3"
+        >
+          <span
+            class="inline-block w-6 h-6 bg-[var(--color-yellow-mark)] border-[2px] border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]"
+            aria-hidden="true"
+          ></span>
+          {site.name}
+        </a>
+        <p class="text-sm text-[var(--color-ink)]/60 max-w-xs">
+          {site.description}
+        </p>
+      </div>
+
+      <nav class="flex flex-wrap gap-x-8 gap-y-2" aria-label="Footer">
+        {
+          site.nav.map((item) => (
+            <a
+              href={item.href}
+              class="text-sm font-semibold uppercase tracking-wide text-[var(--color-ink)] no-underline hover:opacity-70"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <div class="border-t-[2px] border-[var(--color-ink)]/15 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs font-mono text-[var(--color-ink)]/50">
+      <p>© {site.footer.copyright}. Built with Astro</p>
+      <p>Made with ❤ by
+        <a href="/about" class="no-underline hover:underline"> Aji Sasmito</a>
+      </p>
+    </div>
+  </div>
+</footer>

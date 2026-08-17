@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  index?: number;
+}
+
+const { title, description, index } = Astro.props;
+---
+
+<article class="brutal bg-white p-6 h-full flex flex-col">
+  {
+    typeof index === "number" && (
+      <span class="font-mono text-xs font-bold text-[var(--color-ink)]/40 mb-3">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+    )
+  }
+  <h3 class="text-xl font-bold mb-2 tracking-tight">{title}</h3>
+  <p class="text-sm leading-relaxed text-[var(--color-ink)]/75 flex-1">
+    {description}
+  </p>
+</article>

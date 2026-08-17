@@ -1,0 +1,20 @@
+---
+interface Props {
+  color?: "lime" | "acid" | "cobalt" | "white" | "ink";
+  class?: string;
+}
+
+const { color = "lime", class: className = "" } = Astro.props;
+
+const colors = {
+  lime: "bg-[var(--color-lime)] text-[var(--color-ink)]",
+  acid: "bg-[var(--color-acid)] text-[var(--color-ink)]",
+  cobalt: "bg-[var(--color-cobalt)] text-white",
+  white: "bg-white text-[var(--color-ink)]",
+  ink: "bg-[var(--color-ink)] text-[var(--color-acid)]",
+};
+---
+
+<span class={`badge-brutal ${colors[color]} ${className}`}>
+  <slot />
+</span>

@@ -1,0 +1,178 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Badge from "../../components/Badge.astro";
+import NoImage from "../../components/NoImage.astro";
+import Button from "../../components/Button.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<BaseLayout title={`${post.data.title} — JOOYBEE`} description={post.data.description}>
+  <article class="bg-grid">
+    <!-- Header -->
+    <header class="section pb-8 border-b-[3px] border-[var(--color-ink)]">
+      <div class="container-brutal max-w-3xl">
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-wide text-[var(--color-ink)]/60 no-underline mb-6 hover:text-[var(--color-ink)]"
+        >
+          ← All posts
+        </a>
+
+        <Badge color="lime" class="mb-4">{post.data.category}</Badge>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5">
+          {post.data.title}
+        </h1>
+
+        <p class="text-lg text-[var(--color-ink)]/70 mb-6 max-w-2xl">
+          {post.data.description}
+        </p>
+
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-sm text-[var(--color-ink)]/50">
+          <span class="font-bold text-[var(--color-ink)]">{post.data.author}</span>
+          <span aria-hidden="true">·</span>
+          <time datetime={post.data.pubDate.toISOString()}>
+            {formatDate(post.data.pubDate)}
+          </time>
+          {
+            post.data.tags?.length > 0 && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{post.data.tags.join(", ")}</span>
+              </>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover -->
+    <div class="container-brutal max-w-3xl -mt-0">
+      <div class="aspect-[2/1] w-full border-x-[3px] border-b-[3px] border-[var(--color-ink)] overflow-hidden bg-[var(--color-paper-2)]">
+        {
+          post.data.image ? (
+            <img
+              src={post.data.image}
+              alt=""
+              class="w-full h-full object-cover"
+            />
+          ) : (
+            <NoImage class="w-full h-full min-h-[200px]" label="NO COVER" />
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="section pt-10">
+      <div class="container-brutal max-w-3xl">
+        <div class="prose-brutal">
+          <Content />
+        </div>
+
+        <div class="mt-14 pt-8 border-t-[3px] border-[var(--color-ink)] flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+          <p class="font-mono text-xs text-[var(--color-ink)]/50">
+            Enjoy Being Everything · JOOYBEE
+          </p>
+          <Button href="/blog/" variant="secondary" size="sm">
+            ← Back to blog
+          </Button>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose-brutal {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--color-ink);
+  }
+  .prose-brutal > * + * {
+    margin-top: 1.25em;
+  }
+  .prose-brutal h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+  }
+  .prose-brutal h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 1.75em;
+    margin-bottom: 0.4em;
+  }
+  .prose-brutal p {
+    margin-top: 1em;
+  }
+  .prose-brutal ul,
+  .prose-brutal ol {
+    padding-left: 1.25em;
+    margin-top: 1em;
+  }
+  .prose-brutal li + li {
+    margin-top: 0.35em;
+  }
+  .prose-brutal strong {
+    font-weight: 700;
+  }
+  .prose-brutal a {
+    color: var(--color-cobalt);
+    font-weight: 600;
+    text-decoration-thickness: 2px;
+  }
+  .prose-brutal blockquote {
+    border-left: 4px solid var(--color-ink);
+    padding-left: 1rem;
+    margin-left: 0;
+    font-style: italic;
+    background: var(--color-paper-2);
+    padding: 1rem 1rem 1rem 1.25rem;
+    border: 3px solid var(--color-ink);
+    box-shadow: 3px 3px 0 0 var(--color-ink);
+  }
+  .prose-brutal code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-yellow-mark);
+    border: 1.5px solid var(--color-ink);
+    padding: 0.1em 0.35em;
+  }
+  .prose-brutal pre {
+    border: 3px solid var(--color-ink);
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+    padding: 1rem;
+    overflow-x: auto;
+    background: #0a0a0a;
+    color: #faf8f0;
+  }
+  .prose-brutal pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+  }
+</style>
