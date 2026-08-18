@@ -49,6 +49,14 @@ const { placeholder = "Search posts…", class: className = "" } = Astro.props;
       }
     };
 
+    // Baca query dari URL (?q=culture) lalu isi input + filter otomatis
+    const urlParams = new URLSearchParams(window.location.search);
+    const qFromUrl = urlParams.get("q");
+    if (qFromUrl) {
+      input.value = qFromUrl;
+      filter();
+    }
+
     input.addEventListener("input", filter);
   }
 
