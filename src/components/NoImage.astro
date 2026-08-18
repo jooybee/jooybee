@@ -8,34 +8,28 @@ const { class: className = "", label = "NO IMAGE" } = Astro.props;
 ---
 
 <div
-  class={`relative overflow-hidden flex flex-col items-center justify-center gap-3 bg-[var(--color-paper-2)] border-[3px] border-[var(--color-ink)] ${className}`}
+  class={`relative flex items-center justify-center bg-[var(--color-paper-2)] border-[3px] border-[var(--color-ink)] overflow-hidden ${className}`}
   role="img"
   aria-label={label}
 >
-  <!-- Background accent shapes -->
-  <div class="absolute -top-4 -right-4 w-20 h-20 bg-[var(--color-acid)] border-[3px] border-[var(--color-ink)] rotate-12 opacity-90"></div>
-  <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-[var(--color-bubble)] border-[3px] border-[var(--color-ink)] -rotate-6 opacity-80"></div>
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-[var(--color-tangerine)] border-[3px] border-[var(--color-ink)] rotate-45 opacity-70"></div>
+  <!-- Background shape besar di pojok kanan atas -->
+  <div
+    class="absolute -top-8 -right-8 w-32 h-32 bg-[var(--color-yellow-mark)] border-[3px] border-[var(--color-ink)] rotate-12"
+  ></div>
 
-  <!-- Main geometric stack -->
-  <div class="relative z-10 w-20 h-20">
-    <!-- Bottom layer -->
-    <div
-      class="absolute inset-0 border-[3px] border-[var(--color-ink)] bg-[var(--color-yellow-mark)] shadow-[4px_4px_0_0_var(--color-ink)]"
-    ></div>
-    <!-- Middle layer -->
-    <div
-      class="absolute top-2 left-2 w-full h-full border-[3px] border-[var(--color-ink)] bg-[var(--color-cobalt)] shadow-[3px_3px_0_0_var(--color-ink)]"
-    ></div>
-    <!-- Top accent -->
-    <div
-      class="absolute top-4 left-4 w-8 h-8 border-[3px] border-[var(--color-ink)] bg-[var(--color-acid)]"
-    ></div>
-  </div>
+  <!-- Shape kecil di kiri bawah -->
+  <div
+    class="absolute -bottom-4 -left-4 w-16 h-16 bg-[var(--color-bubble)] border-[3px] border-[var(--color-ink)] -rotate-6"
+  ></div>
 
-  <!-- Label -->
+  <!-- Shape kecil di kanan bawah -->
+  <div
+    class="absolute bottom-3 right-4 w-8 h-8 bg-[var(--color-tangerine)] border-[2.5px] border-[var(--color-ink)]"
+  ></div>
+
+  <!-- Label di tengah -->
   <span
-    class="relative z-10 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-ink)] bg-[var(--color-paper)] px-2 py-1 border-[2px] border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]"
+    class="relative z-10 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-ink)] bg-[var(--color-paper)] px-3 py-1.5 border-[2.5px] border-[var(--color-ink)] shadow-[3px_3px_0_0_var(--color-ink)]"
   >
     {label}
   </span>
