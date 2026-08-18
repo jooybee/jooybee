@@ -12,7 +12,7 @@ export const site = {
 
   about: {
     badge: "About me",
-    titleLine1: "Halo.",
+    titleLine1: "Halo semua.",
     titleHighlight: "Salam kenal.",
     subtitle: "Enjoy Being Everything.",
     bio: [
