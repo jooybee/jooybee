@@ -2,44 +2,90 @@
 import { site } from "../config/site";
 ---
 
-<footer class="bg-white border-t-[3px] border-[var(--color-ink)] py-12">
+<footer class="bg-[var(--color-ink)] text-[var(--color-paper)] border-t-[3px] border-[var(--color-ink)] pt-16 overflow-hidden">
   <div class="container-brutal">
-    <div class="flex flex-col md:flex-row justify-between gap-8 mb-10">
+    <!-- Top: brand + nav -->
+    <div class="grid grid-cols-1 md:grid-cols-[1.4fr_2fr] gap-10 pb-12">
       <div>
         <a
           href="/"
-          class="flex items-center gap-2 font-black text-xl tracking-tight no-underline text-[var(--color-ink)] mb-3"
+          class="inline-flex items-center gap-2 font-black text-2xl tracking-tight no-underline text-[var(--color-acid)] mb-3"
         >
           <span
-            class="inline-block w-6 h-6 bg-[var(--color-yellow-mark)] border-[2px] border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]"
+            class="inline-block w-6 h-6 bg-[var(--color-yellow-mark)] border-[2px] border-[var(--color-paper)] shadow-[2px_2px_0_0_var(--color-paper)]"
             aria-hidden="true"
           ></span>
           {site.name}
         </a>
-        <p class="text-sm text-[var(--color-ink)]/60 max-w-xs">
-          {site.description}
+        <p class="text-sm text-[#c8c4ba] max-w-[32ch] mt-3 mb-5 leading-relaxed">
+          {site.footer.tagline}
         </p>
       </div>
 
-      <nav class="flex flex-wrap gap-x-8 gap-y-2" aria-label="Footer">
-        {
-          site.nav.map((item) => (
-            <a
-              href={item.href}
-              class="text-sm font-semibold uppercase tracking-wide text-[var(--color-ink)] no-underline hover:opacity-70"
-            >
-              {item.label}
-            </a>
-          ))
-        }
-      </nav>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div>
+          <h3 class="font-mono text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-acid)] mb-4">
+            Navigasi
+          </h3>
+          <ul class="flex flex-col gap-2.5 list-none m-0 p-0">
+            {
+              site.nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="text-[#d9d5cb] no-underline hover:text-[var(--color-paper)] hover:underline underline-offset-4 decoration-2 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-mono text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-acid)] mb-4">
+            Lainnya
+          </h3>
+          <ul class="flex flex-col gap-2.5 list-none m-0 p-0">
+            <li>
+              <a href="/blog" class="text-[#d9d5cb] no-underline hover:text-[var(--color-paper)] hover:underline underline-offset-4 decoration-2 transition-colors">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="/contact" class="text-[#d9d5cb] no-underline hover:text-[var(--color-paper)] hover:underline underline-offset-4 decoration-2 transition-colors">
+                Contact
+              </a>
+            </li>
+            <li>
+              <a href="/about" class="text-[#d9d5cb] no-underline hover:text-[var(--color-paper)] hover:underline underline-offset-4 decoration-2 transition-colors">
+                Tentang saya
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="border-t-[2px] border-[var(--color-ink)]/15 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs font-mono text-[var(--color-ink)]/50">
-      <p>©{site.footer.copyright} ​✖ <a href="https://astro.build" class="no-underline hover:underline" target="_blank">Astro</a> ​✖ <a href="https://vercel.com" class="no-underline hover:underline" target="_blank">Vercel</a> </p>
-      <p>Made with ❤ by
-        <a href="/about" class="no-underline hover:underline"> Aji Sasmito</a>
-      </p>
+    <!-- Giant wordmark JOOYBEE -->
+    <div
+      class="select-none pointer-events-none mt-4 font-black leading-[0.8] tracking-[-0.04em] text-transparent"
+      style="font-size: clamp(3.5rem, 18vw, 14rem); -webkit-text-stroke: 2px #38352f; text-stroke: 2px #38352f;"
+      aria-hidden="true"
+    >
+      JOOYBEE
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t-[2px] border-[#38352f] pt-6 pb-8 flex flex-col sm:flex-row justify-between gap-3 font-mono text-xs text-[#a8a399]">
+      <span>© {new Date().getFullYear()} JOOYBEE. Enjoy Being Everything.</span>
+      <span>
+        Made with ❤ by
+        <a href="/about" class="text-[var(--color-acid)] font-bold no-underline hover:underline underline-offset-4 decoration-2">
+          Aji Sasmito
+        </a>
+      </span>
     </div>
   </div>
 </footer>
