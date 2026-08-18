@@ -42,17 +42,10 @@ const catClass = category
 <article
   data-blog-card
   data-search={searchable}
-  class="brutal bg-white overflow-hidden flex flex-col h-full hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all relative"
+  class="brutal bg-white overflow-hidden flex flex-col h-full hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all"
 >
-  <!-- Link utama menutupi seluruh card (gambar + judul + deskripsi) -->
-  <a
-    href={href}
-    class="absolute inset-0 z-0"
-    aria-label={title}
-  ></a>
-
-  <!-- Gambar -->
-  <div class="aspect-[16/9] w-full border-b-[3px] border-[var(--color-ink)] overflow-hidden bg-[var(--color-paper-2)] relative z-10 pointer-events-none">
+  <!-- Gambar (bisa diklik) -->
+  <a href={href} class="block aspect-[16/9] w-full border-b-[3px] border-[var(--color-ink)] overflow-hidden bg-[var(--color-paper-2)] no-underline">
     {
       image ? (
         <img
@@ -65,30 +58,36 @@ const catClass = category
         <NoImage class="w-full h-full min-h-[140px]" />
       )
     }
-  </div>
+  </a>
 
   <!-- Konten -->
-  <div class="p-5 flex flex-col flex-1 relative z-10">
+  <div class="p-5 flex flex-col flex-1">
     {
       category && (
         <a
           href={`/blog/category/${category.toLowerCase()}/`}
-          class={`badge-brutal text-[10px] mb-3 w-fit no-underline hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_var(--color-ink)] transition-all relative z-20 ${catClass}`}
+          class={`badge-brutal text-[10px] mb-3 w-fit no-underline hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_var(--color-ink)] transition-all ${catClass}`}
         >
           {category}
         </a>
       )
     }
 
-    <h3 class="text-xl font-bold tracking-tight mb-2 leading-snug pointer-events-none">
-      {title}
+    <!-- Judul (bisa diklik) -->
+    <h3 class="text-xl font-bold tracking-tight mb-2 leading-snug">
+      <a href={href} class="no-underline text-[var(--color-ink)] hover:underline">
+        {title}
+      </a>
     </h3>
 
-    <p class="text-sm leading-relaxed text-[var(--color-ink)]/70 flex-1 mb-4 pointer-events-none">
-      {description}
+    <!-- Deskripsi (bisa diklik juga) -->
+    <p class="text-sm leading-relaxed text-[var(--color-ink)]/70 flex-1 mb-4">
+      <a href={href} class="no-underline text-inherit">
+        {description}
+      </a>
     </p>
 
-    <div class="font-mono text-xs text-[var(--color-ink)]/50 flex flex-wrap gap-x-2 gap-y-1 relative z-20">
+    <div class="font-mono text-xs text-[var(--color-ink)]/50 flex flex-wrap gap-x-2 gap-y-1">
       {
         author && (
           <a href="/about" class="no-underline hover:underline">
