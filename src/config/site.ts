@@ -38,8 +38,8 @@ export const site = {
   ],
 
   nav: [
-    { label: "Beranda", href: "/" },
     { label: "Blog", href: "/blog" },
+    { label: "Beranda", href: "/" },
     { label: "Kategori", href: "/blog/category" },
     { label: "Tentang saya", href: "/about" },
   ],
