@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Badge from "../../components/Badge.astro";
 import NoImage from "../../components/NoImage.astro";
 import Button from "../../components/Button.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -23,6 +24,39 @@ function formatDate(d: Date) {
     day: "numeric",
   });
 }
+
+/* ── Related posts: category + tags, max 3 ── */
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const currentTags = new Set(post.data.tags ?? []);
+
+const related = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => {
+    let score = 0;
+    if (p.data.category === post.data.category) score += 3;
+    for (const tag of p.data.tags ?? []) {
+      if (currentTags.has(tag)) score += 2;
+    }
+    return { post: p, score };
+  })
+  .filter((x) => x.score > 0)
+  .sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf();
+  })
+  .slice(0, 3)
+  .map((x) => x.post);
+
+/* Fallback: latest posts if kurang dari 3 yang match */
+let relatedFinal = related;
+if (relatedFinal.length < 3) {
+  const ids = new Set([post.id, ...relatedFinal.map((p) => p.id)]);
+  const extras = allPosts
+    .filter((p) => !ids.has(p.id))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3 - relatedFinal.length);
+  relatedFinal = [...relatedFinal, ...extras];
+}
 ---
 
 <BaseLayout title={`${post.data.title} — JOOYBEE`} description={post.data.description}>
@@ -37,10 +71,7 @@ function formatDate(d: Date) {
           ← All posts
         </a>
 
-        <!-- Category jadi bisa diklik -->
-        <a href={`/blog/category/${post.data.category.toLowerCase()}`} class="no-underline">
-          <Badge color="lime" class="mb-4">{post.data.category}</Badge>
-        </a>
+        <Badge color="lime" class="mb-4">{post.data.category}</Badge>
 
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5">
           {post.data.title}
@@ -56,25 +87,11 @@ function formatDate(d: Date) {
           <time datetime={post.data.pubDate.toISOString()}>
             {formatDate(post.data.pubDate)}
           </time>
-
-          <!-- Tags jadi bisa diklik -->
           {
             post.data.tags?.length > 0 && (
               <>
                 <span aria-hidden="true">·</span>
-                <span class="inline-flex flex-wrap items-center gap-x-1">
-                  {post.data.tags.map((tag, index) => (
-                    <>
-                      {index > 0 && <span>,</span>}
-                      <a
-                        href={`/blog/?q=${encodeURIComponent(tag)}`}
-                        class="hover:underline hover:text-[var(--color-ink)] transition-colors"
-                      >
-                        {tag}
-                      </a>
-                    </>
-                  ))}
-                </span>
+                <span>{post.data.tags.join(", ")}</span>
               </>
             )
           }
@@ -117,6 +134,9 @@ function formatDate(d: Date) {
       </div>
     </div>
   </article>
+
+  <!-- Related posts -->
+  <RelatedPosts posts={relatedFinal} title="Related posts" />
 </BaseLayout>
 
 <style is:global>

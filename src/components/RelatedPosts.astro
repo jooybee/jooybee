@@ -1,0 +1,50 @@
+---
+import BlogCard from "./BlogCard.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  title?: string;
+}
+
+const { posts, title = "Related posts" } = Astro.props;
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+{
+  posts.length > 0 && (
+    <section class="section border-t-[3px] border-[var(--color-ink)] bg-[var(--color-paper)]">
+      <div class="container-brutal">
+        <div class="mb-8">
+          <p class="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-ink)]/50 mb-2">
+            Baca juga
+          </p>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+            {title}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              href={`/blog/${post.id}/`}
+              category={post.data.category}
+              date={formatDate(post.data.pubDate)}
+              author={post.data.author}
+              image={post.data.image}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
