@@ -37,7 +37,10 @@ function formatDate(d: Date) {
           ← All posts
         </a>
 
-        <Badge color="lime" class="mb-4">{post.data.category}</Badge>
+        <!-- Category jadi bisa diklik -->
+        <a href={`/blog/category/${post.data.category.toLowerCase()}`} class="no-underline">
+          <Badge color="lime" class="mb-4">{post.data.category}</Badge>
+        </a>
 
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5">
           {post.data.title}
@@ -53,11 +56,25 @@ function formatDate(d: Date) {
           <time datetime={post.data.pubDate.toISOString()}>
             {formatDate(post.data.pubDate)}
           </time>
+
+          <!-- Tags jadi bisa diklik -->
           {
             post.data.tags?.length > 0 && (
               <>
                 <span aria-hidden="true">·</span>
-                <span>{post.data.tags.join(", ")}</span>
+                <span class="inline-flex flex-wrap items-center gap-x-1">
+                  {post.data.tags.map((tag, index) => (
+                    <>
+                      {index > 0 && <span>,</span>}
+                      <a
+                        href={`/blog/?q=${encodeURIComponent(tag)}`}
+                        class="hover:underline hover:text-[var(--color-ink)] transition-colors"
+                      >
+                        {tag}
+                      </a>
+                    </>
+                  ))}
+                </span>
               </>
             )
           }
