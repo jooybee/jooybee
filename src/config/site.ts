@@ -22,8 +22,8 @@ export const site = {
     ],
     facts: [
       { label: "Berbasis", value: "Indonesia" },
-      { label: "Fokus", value: "Writing · Product · Culture" },
-      { label: "Status", value: "Open for chat" },
+      { label: "Fokus", value: "Belajar · Praktek · Berbagi" },
+      { label: "Status", value: "Open for chat." },
     ],
   },
 
@@ -46,17 +46,17 @@ export const site = {
 
   cta: {
     primary: { label: "Contact", href: "/contact" },
-    secondary: { label: "Read the blog", href: "/blog" },
+    secondary: { label: "Baca blognya", href: "/blog" },
   },
 
   hero: {
     badge: "Enjoy Being Everything",
-    titleLine1: "Words that",
-    titleHighlight: "punch back.",
+    titleLine1: "Tulisan jujur",
+    titleHighlight: "Apa adanya.",
     description:
       "JOOYBEE adalah sudut kecil di internet yang apa adanya — esai, catatan, opini dan sedikit basa-basi. Enjoy being everything.",
     checklist: [
-      "Opini yang tajam, tapi nggak galak",
+      "Opini yang jujur, disampaikan tenang",
       "Sedikit omong kosong, tapi tetap memiliki makna",
       "Dibuat untuk saya sendiri, tapi boleh dibaca orang lain juga",
     ],
@@ -79,17 +79,17 @@ export const site = {
 
   features: [
     {
-      title: "Esai yang tajam",
+      title: "Esai yang mendalam",
       description:
         "Tulisan panjang yang menghargai waktu kamu. Bukan listicle, bukan konten SEO. Cuma ide yang layak dibaca sampai habis.",
     },
     {
-      title: "Opini yang blak-blakan",
+      title: "Sudut pandang pribadi",
       description:
-        "Kami bilang yang biasanya orang simpan sendiri. Kalau ada yang aneh, ya kami sebut aja.",
+        "Pemikiran yang biasanya saya simpan sendiri, saya tulis disini dengan konteks secukupnya.",
     },
     {
-      title: "Gratis",
+      title: "Tanpa iklan, tanpa biaya langganan",
       description:
         "Semua tulisan bisa dibaca gratis. Langganan cuma kalau kamu mau saya cepat kaya.",
     },
