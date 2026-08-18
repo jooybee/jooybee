@@ -12,8 +12,8 @@ export const site = {
 
   about: {
     badge: "About me",
-    titleLine1: "Halo semua.",
-    titleHighlight: "Salam kenal.",
+    titleLine1: "Nggak kenal.",
+    titleHighlight: "Nggak sayang.",
     subtitle: "Enjoy Being Everything.",
     bio: [
       "Halo — saya penulis di balik JOOYBEE. Blog ini tempat saya menaruh esai, catatan produk, opini dan sedikit basa-basi.",
