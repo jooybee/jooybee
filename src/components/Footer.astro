@@ -33,11 +33,7 @@ const socials = [
           href="/"
           class="inline-flex items-center gap-2.5 font-black text-2xl tracking-tight no-underline text-[var(--color-yellow-mark)] mb-3"
         >
-          <span
-            class="inline-block w-6 h-6 bg-[var(--color-yellow-mark)] border-[2.5px] border-[var(--color-yellow-mark)]"
-            aria-hidden="true"
-          ></span>
-          {site.name}
+        {site.name}
         </a>
         <p class="text-sm text-[#c8c4ba] max-w-[32ch] mt-3 leading-relaxed">
           {site.footer.tagline}
@@ -103,8 +99,8 @@ const socials = [
     <div class="border-t-[2px] border-[#38352f] pt-6 pb-8 flex flex-col sm:flex-row justify-between gap-3 font-mono text-xs text-[#a8a399]">
       <span>© {new Date().getFullYear()} JOOYBEE. Enjoy Being Everything.</span>
       <span>
-        Made with ❤ by 
-        <a href="/about" class="text-[var(--color-yellow-mark)] font-bold no-underline hover:underline underline-offset-4 decoration-2">
+        Made with ❤ by {" "}
+         <a href="/about" class="text-[var(--color-yellow-mark)] font-bold no-underline hover:underline underline-offset-4 decoration-2">
           Aji Sasmito
         </a>
       </span>
