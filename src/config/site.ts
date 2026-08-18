@@ -40,7 +40,7 @@ export const site = {
   nav: [
     { label: "Beranda", href: "/" },
     { label: "Blog", href: "/blog" },
-    { label: "Kategori", href:"/blog/category"},
+    { label: "Kategori", href: "/blog/category" },
     { label: "Tentang saya", href: "/about" },
   ],
 
@@ -110,55 +110,6 @@ export const site = {
     },
   ],
 
-  pricing: [
-    {
-      name: "Reader",
-      price: "$0",
-      period: "/forever",
-      description: "For people who just want to read.",
-      features: [
-        "All posts free",
-        "RSS feed",
-        "No account needed",
-        "Community vibes",
-      ],
-      cta: "Start reading",
-      href: "/blog",
-      featured: false,
-    },
-    {
-      name: "Supporter",
-      price: "$5",
-      period: "/mo",
-      description: "For people who want the letter and zero ads forever.",
-      features: [
-        "Monthly essay letter",
-        "Early access drafts",
-        "Name in the credits",
-        "Direct reply line",
-      ],
-      cta: "Become a supporter",
-      href: "/contact",
-      featured: true,
-      badge: "Most popular",
-    },
-    {
-      name: "Patron",
-      price: "$15",
-      period: "/mo",
-      description: "For people who want to keep JOOYBEE alive.",
-      features: [
-        "Everything in Supporter",
-        "Suggest topics",
-        "Private Discord",
-        "Annual print zine",
-      ],
-      cta: "Talk to us",
-      href: "/contact",
-      featured: false,
-    },
-  ],
-
   faq: [
     {
       q: "Apa itu JOOYBEE?",
@@ -178,7 +129,7 @@ export const site = {
     },
     {
       q: "Ada newsletter?",
-      a: "Ada. tapi belum jadi masih dalam proses ",
+      a: "Ada. tapi belum jadi masih dalam proses",
     },
   ],
 
