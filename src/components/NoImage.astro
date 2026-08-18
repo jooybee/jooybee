@@ -8,22 +8,35 @@ const { class: className = "", label = "NO IMAGE" } = Astro.props;
 ---
 
 <div
-  class={`flex flex-col items-center justify-center gap-2 bg-[var(--color-paper-2)] border-[3px] border-[var(--color-ink)] ${className}`}
+  class={`relative overflow-hidden flex flex-col items-center justify-center gap-3 bg-[var(--color-paper-2)] border-[3px] border-[var(--color-ink)] ${className}`}
   role="img"
   aria-label={label}
 >
-  <!-- Neo-brutalist geometric placeholder -->
-  <div class="relative w-16 h-16">
+  <!-- Background accent shapes -->
+  <div class="absolute -top-4 -right-4 w-20 h-20 bg-[var(--color-acid)] border-[3px] border-[var(--color-ink)] rotate-12 opacity-90"></div>
+  <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-[var(--color-bubble)] border-[3px] border-[var(--color-ink)] -rotate-6 opacity-80"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-[var(--color-tangerine)] border-[3px] border-[var(--color-ink)] rotate-45 opacity-70"></div>
+
+  <!-- Main geometric stack -->
+  <div class="relative z-10 w-20 h-20">
+    <!-- Bottom layer -->
     <div
-      class="absolute inset-0 border-[3px] border-[var(--color-ink)] bg-[var(--color-yellow-mark)] shadow-[3px_3px_0_0_var(--color-ink)]"
-    >
-    </div>
+      class="absolute inset-0 border-[3px] border-[var(--color-ink)] bg-[var(--color-yellow-mark)] shadow-[4px_4px_0_0_var(--color-ink)]"
+    ></div>
+    <!-- Middle layer -->
     <div
-      class="absolute top-2 left-2 w-full h-full border-[3px] border-[var(--color-ink)] bg-[var(--color-cobalt)]"
-    >
-    </div>
+      class="absolute top-2 left-2 w-full h-full border-[3px] border-[var(--color-ink)] bg-[var(--color-cobalt)] shadow-[3px_3px_0_0_var(--color-ink)]"
+    ></div>
+    <!-- Top accent -->
+    <div
+      class="absolute top-4 left-4 w-8 h-8 border-[3px] border-[var(--color-ink)] bg-[var(--color-acid)]"
+    ></div>
   </div>
-  <span class="font-mono text-xs font-bold uppercase tracking-widest text-[var(--color-ink)]/60">
+
+  <!-- Label -->
+  <span
+    class="relative z-10 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-ink)] bg-[var(--color-paper)] px-2 py-1 border-[2px] border-[var(--color-ink)] shadow-[2px_2px_0_0_var(--color-ink)]"
+  >
     {label}
   </span>
 </div>
