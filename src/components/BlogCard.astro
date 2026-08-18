@@ -27,7 +27,6 @@ const searchable = [title, description, category, author, searchText]
   .filter(Boolean)
   .join(" ");
 
-// Warna badge per kategori
 const categoryColors: Record<string, string> = {
   Essay: "bg-[var(--color-yellow-mark)] text-[var(--color-ink)]",
   Playbook: "bg-[var(--color-lime)] text-[var(--color-ink)]",
@@ -43,49 +42,62 @@ const catClass = category
 <article
   data-blog-card
   data-search={searchable}
-  class="brutal bg-white overflow-hidden flex flex-col h-full hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all"
+  class="brutal bg-white overflow-hidden flex flex-col h-full hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-ink)] transition-all relative"
 >
-  <a href={href} class="flex flex-col h-full no-underline text-[var(--color-ink)]">
-    <div class="aspect-[16/9] w-full border-b-[3px] border-[var(--color-ink)] overflow-hidden bg-[var(--color-paper-2)]">
-      {
-        image ? (
-          <img
-            src={image}
-            alt=""
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        ) : (
-          <NoImage class="w-full h-full min-h-[140px]" />
-        )
-      }
-    </div>
+  <!-- Link utama menutupi seluruh card (gambar + judul + deskripsi) -->
+  <a
+    href={href}
+    class="absolute inset-0 z-0"
+    aria-label={title}
+  ></a>
 
-    <div class="p-5 flex flex-col flex-1">
+  <!-- Gambar -->
+  <div class="aspect-[16/9] w-full border-b-[3px] border-[var(--color-ink)] overflow-hidden bg-[var(--color-paper-2)] relative z-10 pointer-events-none">
+    {
+      image ? (
+        <img
+          src={image}
+          alt=""
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      ) : (
+        <NoImage class="w-full h-full min-h-[140px]" />
+      )
+    }
+  </div>
+
+  <!-- Konten -->
+  <div class="p-5 flex flex-col flex-1 relative z-10">
+    {
+      category && (
+        <a
+          href={`/blog/category/${category.toLowerCase()}/`}
+          class={`badge-brutal text-[10px] mb-3 w-fit no-underline hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_var(--color-ink)] transition-all relative z-20 ${catClass}`}
+        >
+          {category}
+        </a>
+      )
+    }
+
+    <h3 class="text-xl font-bold tracking-tight mb-2 leading-snug pointer-events-none">
+      {title}
+    </h3>
+
+    <p class="text-sm leading-relaxed text-[var(--color-ink)]/70 flex-1 mb-4 pointer-events-none">
+      {description}
+    </p>
+
+    <div class="font-mono text-xs text-[var(--color-ink)]/50 flex flex-wrap gap-x-2 gap-y-1 relative z-20">
       {
-        category && (
-          <a
-            href={`/blog/category/${category.toLowerCase()}/`}
-            class={`badge-brutal text-[10px] mb-3 w-fit no-underline hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_var(--color-ink)] transition-all ${catClass}`}
-            onclick="event.stopPropagation()"
-          >
-            {category}
+        author && (
+          <a href="/about" class="no-underline hover:underline">
+            {author}
           </a>
         )
       }
-      <h3 class="text-xl font-bold tracking-tight mb-2 leading-snug">
-        {title}
-      </h3>
-      <p class="text-sm leading-relaxed text-[var(--color-ink)]/70 flex-1 mb-4">
-        {description}
-      </p>
-      <div class="font-mono text-xs text-[var(--color-ink)]/50 flex flex-wrap gap-x-2 gap-y-1">
-        {author && (
-          <a href="/about" class="no-underline hover:underline">{author}</a>
-        )}
-        {author && date && <span aria-hidden="true">·</span>}
-        {date && <time>{date}</time>}
-      </div>
+      {author && date && <span aria-hidden="true">·</span>}
+      {date && <time>{date}</time>}
     </div>
-  </a>
+  </div>
 </article>
