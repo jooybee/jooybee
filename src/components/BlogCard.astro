@@ -26,6 +26,18 @@ const {
 const searchable = [title, description, category, author, searchText]
   .filter(Boolean)
   .join(" ");
+
+// Warna badge per kategori
+const categoryColors: Record<string, string> = {
+  Essay: "bg-[var(--color-yellow-mark)] text-[var(--color-ink)]",
+  Playbook: "bg-[var(--color-lime)] text-[var(--color-ink)]",
+  Privacy: "bg-[var(--color-bubble)] text-[var(--color-ink)]",
+  Opinion: "bg-[var(--color-tangerine)] text-[var(--color-ink)]",
+};
+
+const catClass = category
+  ? categoryColors[category] || "bg-[var(--color-acid)] text-[var(--color-ink)]"
+  : "bg-[var(--color-paper-2)] text-[var(--color-ink)]";
 ---
 
 <article
@@ -52,9 +64,13 @@ const searchable = [title, description, category, author, searchText]
     <div class="p-5 flex flex-col flex-1">
       {
         category && (
-          <span class="badge-brutal bg-[var(--color-paper-2)] text-[10px] mb-3 w-fit">
+          <a
+            href={`/blog/category/${category.toLowerCase()}/`}
+            class={`badge-brutal text-[10px] mb-3 w-fit no-underline hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_var(--color-ink)] transition-all ${catClass}`}
+            onclick="event.stopPropagation()"
+          >
             {category}
-          </span>
+          </a>
         )
       }
       <h3 class="text-xl font-bold tracking-tight mb-2 leading-snug">
@@ -64,8 +80,9 @@ const searchable = [title, description, category, author, searchText]
         {description}
       </p>
       <div class="font-mono text-xs text-[var(--color-ink)]/50 flex flex-wrap gap-x-2 gap-y-1">
-        {author && 
-         (<a href="/about" class="no-underline hover:underline">{author}</a>)}
+        {author && (
+          <a href="/about" class="no-underline hover:underline">{author}</a>
+        )}
         {author && date && <span aria-hidden="true">·</span>}
         {date && <time>{date}</time>}
       </div>
