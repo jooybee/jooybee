@@ -6,7 +6,7 @@ import Button from "./Button.astro";
 
 <section class="bg-grid section relative overflow-hidden border-0 reveal">
   <div class="container-brutal">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div class="hero-grid grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <!-- Left: copy -->
       <div>
         <Badge color="lime" class="mb-6">
@@ -129,4 +129,10 @@ import Button from "./Button.astro";
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+/* Paksa 1 kolom di layar kecil (termasuk Desktop Mode di HP) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>
