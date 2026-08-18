@@ -5,7 +5,7 @@ const socials = [
   {
     id: "facebook",
     label: "Facebook",
-    href: "https://facebook.com/jooybee", // ganti kalau URL beda
+    href: "https://facebook.com/jooybee", // ganti URL-mu
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>`,
   },
   {
@@ -25,8 +25,8 @@ const socials = [
 
 <footer class="bg-[var(--color-ink)] text-[var(--color-paper)] border-t-[3px] border-[var(--color-ink)] pt-16 overflow-hidden">
   <div class="container-brutal">
-    <!-- Top: brand + nav + social -->
-    <div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_auto] gap-10 pb-12">
+    <!-- Top: brand kiri | nav + sosial kanan (sejajar) -->
+    <div class="grid grid-cols-1 md:grid-cols-[1.3fr_2fr] gap-10 pb-12">
       <!-- Brand -->
       <div>
         <a
@@ -44,53 +44,56 @@ const socials = [
         </p>
       </div>
 
-      <!-- Navigasi -->
-      <div>
-        <h3 class="font-mono text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-yellow-mark)] mb-4">
-          Navigasi
-        </h3>
-        <ul class="flex flex-col gap-2.5 list-none m-0 p-0">
-          {
-            site.nav.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="text-[#d9d5cb] no-underline hover:text-[var(--color-yellow-mark)] hover:underline underline-offset-4 decoration-2 transition-colors"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <!-- Navigasi + Sosial sejajar -->
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Navigasi -->
+        <div>
+          <h3 class="font-mono text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-yellow-mark)] mb-4">
+            Navigasi
+          </h3>
+          <ul class="flex flex-col gap-2.5 list-none m-0 p-0">
+            {
+              site.nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="text-[#d9d5cb] no-underline hover:text-[var(--color-yellow-mark)] hover:underline underline-offset-4 decoration-2 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
 
-      <!-- Social icons -->
-      <div>
-        <h3 class="font-mono text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-yellow-mark)] mb-4">
-          Sosial
-        </h3>
-        <div class="flex items-center gap-3">
-          {
-            socials.map((s) => (
-              <a
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                class="inline-flex items-center justify-center w-10 h-10 bg-[var(--color-paper)] text-[var(--color-ink)] border-[2.5px] border-[var(--color-paper)] no-underline hover:bg-[var(--color-yellow-mark)] hover:border-[var(--color-yellow-mark)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
-                set:html={s.icon}
-              />
-            ))
-          }
+        <!-- Sosial (di samping navigasi) -->
+        <div>
+          <h3 class="font-mono text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-yellow-mark)] mb-4">
+            Sosial
+          </h3>
+          <div class="flex items-center gap-3 flex-wrap">
+            {
+              socials.map((s) => (
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  class="inline-flex items-center justify-center w-10 h-10 bg-[var(--color-paper)] text-[var(--color-ink)] border-[2.5px] border-[var(--color-paper)] no-underline hover:bg-[var(--color-yellow-mark)] hover:border-[var(--color-yellow-mark)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
+                  set:html={s.icon}
+                />
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Giant wordmark JOOYBEE (kuning) -->
+    <!-- Giant wordmark JOOYBEE — transparan + outline (gaya Slab) -->
     <div
-      class="select-none pointer-events-none mt-4 font-black leading-[0.8] tracking-[-0.04em]"
-      style="font-size: clamp(3.5rem, 18vw, 14rem); color: var(--color-yellow-mark);"
+      class="select-none pointer-events-none mt-4 font-black leading-[0.8] tracking-[-0.04em] text-transparent"
+      style="font-size: clamp(3.5rem, 18vw, 14rem); -webkit-text-stroke: 2px #5c574e; text-stroke: 2px #5c574e;"
       aria-hidden="true"
     >
       JOOYBEE
@@ -100,7 +103,7 @@ const socials = [
     <div class="border-t-[2px] border-[#38352f] pt-6 pb-8 flex flex-col sm:flex-row justify-between gap-3 font-mono text-xs text-[#a8a399]">
       <span>© {new Date().getFullYear()} JOOYBEE. Enjoy Being Everything.</span>
       <span>
-        Made with ❤ by
+        Made with ❤ by 
         <a href="/about" class="text-[var(--color-yellow-mark)] font-bold no-underline hover:underline underline-offset-4 decoration-2">
           Aji Sasmito
         </a>
